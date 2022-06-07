@@ -2,11 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CsharpSpanOfT
+namespace CSharpSamples.Tests
 {
-    public static class SpanExtensions
+    public static class SpanOfT
     {
-        public static bool ContainsRole(this IEnumerable<Person> claims, ReadOnlySpan<char> allowedRoles)
+        public static void Run()
+        {
+            var people = new List<Person>();
+            Enumerable.Range(0, 5).ToList().ForEach(x => {
+                people.Add(new Person { Name = "Matheus" });
+            });
+
+            var stringWithMatheus = "Clark,Matheus,Viviam,Lois";
+            var resultTrue = people.ContainsRole(stringWithMatheus);
+            Console.WriteLine($"List: {stringWithMatheus} \r\n \tHas Matheus?: {resultTrue}");
+
+            Console.WriteLine();
+
+            var stringWithoutMatheus = "Clark,Matheus2,Viviam,Lois";
+            var resultFalse = people.ContainsRole(stringWithoutMatheus);
+            Console.WriteLine($"List: {stringWithoutMatheus} \r\n \tHas Matheus?: {resultFalse}");
+        }
+
+        private static bool ContainsRole(this IEnumerable<Person> claims, ReadOnlySpan<char> allowedRoles)
         {
             ReadOnlySpan<char> prefix = "";
             ReadOnlySpan<char> suffix = ",";
@@ -36,6 +54,11 @@ namespace CsharpSpanOfT
             }
 
             return false;
+        }
+
+        private class Person
+        {
+            public string Name { get; set; }
         }
     }
 }
