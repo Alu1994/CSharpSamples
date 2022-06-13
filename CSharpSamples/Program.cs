@@ -9,6 +9,8 @@ namespace CSharpSamples
     {
         static async Task Main(string[] args)
         {
+            ExecuteTest(RecordsCsharp10.ReadonlyRecordStruct);
+            ExecuteTest(RecordsCsharp10.RecordClass);
             ExecuteTest(SpanOfT.Run);
             await ExecuteTest(AsyncEnumerable.AsyncTaskRead);
             await ExecuteTest(AsyncEnumerable.AsyncEnumerableRead);
